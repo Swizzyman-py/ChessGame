@@ -12,25 +12,59 @@ class Knight(pygame.sprite.Sprite):
         self.pic = pygame.transform.scale(self.pic, (SQUARE_SIZE,SQUARE_SIZE))
         screen.blit(self.pic, (self.x, self.y))
 class Pawn(pygame.sprite.Sprite):
-    def __init__(self, startX, startY):
-        pass
+    def __init__(self, team, startX, startY):
+        self.x = startX
+        self.y = startY
+        if(team == "black"):
+            self.pic = pygame.image.load("Images/Black_Pawn.png")
+        if(team == "white"):
+            self.pic = pygame.image.load("Images/White_Pawn.png")
+        self.pic = pygame.transform.scale(self.pic, (SQUARE_SIZE,SQUARE_SIZE))
+        screen.blit(self.pic, (self.x, self.y))
 
 class Bishop(pygame.sprite.Sprite):
-    def __init__(self, startX, startY):
-        pass
+    def __init__(self, team, startX, startY):
+        self.x = startX
+        self.y = startY
+        if(team == "black"):
+            self.pic = pygame.image.load("Images/Black_Bishop.png")
+        if(team == "white"):
+            self.pic = pygame.image.load("Images/White_Bishop.png")
+        self.pic = pygame.transform.scale(self.pic, (SQUARE_SIZE,SQUARE_SIZE))
+        screen.blit(self.pic, (self.x, self.y))
 
 class Rook(pygame.sprite.Sprite):
-    def __init__(self):
-        pass
-
+    def __init__(self, team, startX, startY):
+        self.x = startX
+        self.y = startY
+        if(team == "black"):
+            self.pic = pygame.image.load("Images/Black_Rook.png")
+        if(team == "white"):
+            self.pic = pygame.image.load("Images/White_Rook.png")
+        self.pic = pygame.transform.scale(self.pic, (SQUARE_SIZE,SQUARE_SIZE))
+        screen.blit(self.pic, (self.x, self.y))
 class Queen(pygame.sprite.Sprite):
-    def __init__(self):
-        pass
+    def __init__(self, team, startX, startY):
+        self.x = startX
+        self.y = startY
+        if(team == "black"):
+            self.pic = pygame.image.load("Images/Black_Queen.png")
+        if(team == "white"):
+            self.pic = pygame.image.load("Images/White_Queen.png")
+        self.pic = pygame.transform.scale(self.pic, (SQUARE_SIZE,SQUARE_SIZE))
+        screen.blit(self.pic, (self.x, self.y))
 
 
 class King(pygame.sprite.Sprite):
-    def __init__(self):
-        pass
+    def __init__(self, team, startX, startY):
+        self.x = startX
+        self.y = startY
+        if(team == "black"):
+            self.pic = pygame.image.load("Images/Black_King.png")
+        if(team == "white"):
+            self.pic = pygame.image.load("Images/White_King.png")
+        self.pic = pygame.transform.scale(self.pic, (SQUARE_SIZE,SQUARE_SIZE))
+        screen.blit(self.pic, (self.x, self.y))
 
 
 #Initializes the game
@@ -43,9 +77,9 @@ SQUARE_SIZE = 128
 
 
 #Chess board backround
-backround = pygame.image.load("Images/ChessBoard.jpg")
+backround = pygame.image.load("Images/ChessBoard.png")
 backround = pygame.transform.scale(backround, (WIDTH,HEIGHT))
-whiteQueen = pygame.image.load("Images/White_Queen.png")
+
 
 #Setting up the screen dimesions and "object"
 screen = pygame.display.set_mode((WIDTH,HEIGHT))
@@ -57,8 +91,29 @@ running = True
 def InitializeBoardPieces():
     blackKnight1 = Knight("black", SQUARE_SIZE,0)
     blackKnight2 = Knight("black", 6 * SQUARE_SIZE,0)
+    blackRook1 = Rook("black", 0,0)
+    blackRook2 = Rook("black", 7 * SQUARE_SIZE,0)
+    blackBishop1 = Bishop("black", 2 * SQUARE_SIZE,0)
+    blackBishop2 = Bishop("black", 5 * SQUARE_SIZE,0)
+    blackQueen = Queen("black", 3 * SQUARE_SIZE, 0)
+    blackKing = King("black", 4 * SQUARE_SIZE, 0)
+    blackPawn1 = Pawn("black", 0, SQUARE_SIZE)
+    blackPawn2 = Pawn("black", 1 * SQUARE_SIZE, SQUARE_SIZE)
+    blackPawn3 = Pawn("black", 2 * SQUARE_SIZE, SQUARE_SIZE)
+    blackPawn4 = Pawn("black", 3 * SQUARE_SIZE, SQUARE_SIZE)
+    blackPawn5 = Pawn("black", 4 * SQUARE_SIZE, SQUARE_SIZE)
+    blackPawn6 = Pawn("black", 5 * SQUARE_SIZE, SQUARE_SIZE)
+    blackPawn7 = Pawn("black", 6 * SQUARE_SIZE, SQUARE_SIZE)
+    blackPawn8 = Pawn("black", 7 * SQUARE_SIZE, SQUARE_SIZE)
+    
+
+
+    
+    whiteRook1 = Rook("white", 0,7 * SQUARE_SIZE)
+    whiteRook2 = Rook("white", 7 * SQUARE_SIZE,7 * SQUARE_SIZE)
     whiteKnight1 = Knight("white", SQUARE_SIZE, 7 * SQUARE_SIZE)
     whiteKnight2 = Knight("white", 6 * SQUARE_SIZE, 7 * SQUARE_SIZE)
+    
 
 
 
