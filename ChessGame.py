@@ -1,6 +1,36 @@
 import pygame
 import sys
 
+class piece(pygame.sprite.Sprite):
+    def __init__(self):
+        self.alive = True
+
+
+class Knight(pygame.sprite.Sprite):
+    def __init__(self):
+        super(piece, self).__init__()
+
+class Pawn(pygame.sprite.Sprite):
+    def __init__(self):
+        super(piece, self).__init__()
+
+class Bishop(pygame.sprite.Sprite):
+    def __init__(self):
+        super(piece, self).__init__()
+
+class Rook(pygame.sprite.Sprite):
+    def __init__(self):
+        super(piece, self).__init__()
+
+class Queen(pygame.sprite.Sprite):
+    def __init__(self):
+        super(piece, self).__init__()
+
+
+class King(pygame.sprite.Sprite):
+    def __init__(self):
+        super(piece, self).__init__()
+
 
 #Initializes the game
 pygame.init()
