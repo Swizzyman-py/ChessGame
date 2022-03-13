@@ -6,6 +6,7 @@ class piece(pygame.sprite.Sprite):
         self.alive = True
 
 
+
 class Knight(pygame.sprite.Sprite):
     def __init__(self):
         super(piece, self).__init__()
@@ -47,11 +48,12 @@ GREEN =(0,255,0)
 YELLOW = (0,0,255)
 
 #Chess board backround
-BACKROUND = pygame.image.load("ChessBoard.jpg")
-BACKROUND = pygame.transform.scale(BACKROUND, (WIDTH,HEIGHT))
+backround = pygame.image.load("ChessBoard.jpg")
+backround = pygame.transform.scale(backround, (WIDTH,HEIGHT))
+whiteQueen = pygame.image.load("White_Queen.png")
 
 #Setting up the screen dimesions and "object"
-SCREEN = pygame.display.set_mode((WIDTH,HEIGHT))
+screen = pygame.display.set_mode((WIDTH,HEIGHT))
 
 #While true the game will run
 running = True
@@ -61,8 +63,8 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-    SCREEN.blit(BACKROUND, (0,0))
-    
+    screen.blit(backround, (0,0))
+    screen.blit(whiteQueen, (100,100))
 
     # Flip the display
     pygame.display.update()
