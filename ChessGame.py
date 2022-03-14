@@ -113,7 +113,19 @@ def InitializeBoardPieces():
     whiteRook2 = Rook("white", 7 * SQUARE_SIZE,7 * SQUARE_SIZE)
     whiteKnight1 = Knight("white", SQUARE_SIZE, 7 * SQUARE_SIZE)
     whiteKnight2 = Knight("white", 6 * SQUARE_SIZE, 7 * SQUARE_SIZE)
-    
+    whiteBishop1 = Bishop("white", 2 * SQUARE_SIZE, 7 * SQUARE_SIZE)
+    whiteBishop2 = Bishop("white", 5 * SQUARE_SIZE, 7 * SQUARE_SIZE)
+    whiteQueen = Queen("white", 3 * SQUARE_SIZE, 7 * SQUARE_SIZE)
+    whiteKing = King("white", 4 * SQUARE_SIZE, 7 * SQUARE_SIZE)
+    whitePawn1 = Pawn("white", 0, 6 * SQUARE_SIZE)
+    whitePawn2 = Pawn("white", 1 * SQUARE_SIZE, 6 * SQUARE_SIZE)
+    whitePawn3 = Pawn("white", 2 * SQUARE_SIZE, 6 * SQUARE_SIZE)
+    whitePawn4 = Pawn("white", 3 * SQUARE_SIZE, 6 * SQUARE_SIZE)
+    whitePawn5 = Pawn("white", 4 * SQUARE_SIZE, 6 * SQUARE_SIZE)
+    whitePawn6 = Pawn("white", 5 * SQUARE_SIZE, 6 * SQUARE_SIZE)
+    whitePawn7 = Pawn("white", 6 * SQUARE_SIZE, 6 * SQUARE_SIZE)
+    whitePawn8 = Pawn("white", 7 * SQUARE_SIZE, 6 * SQUARE_SIZE)
+   
 
 
 
