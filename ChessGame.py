@@ -1,22 +1,32 @@
+import click
+from numpy import square
 import pygame
 import sys
 
-
+obj_list = []
 class piece(pygame.sprite.Sprite):
-    def __init__(self, team, array=None):
+    def __init__(self, name, team, array=None):
         self.x = array[0]
         self.y = array[1]
         self.team = team
+        self.name = name
+        self.SetPieceSquare()
         
     def PlacePic(self):
         screen.blit(self.pic, (self.x, self.y))
+
+
+    def SetPieceSquare(self):
+        self.square = [self.x/SQUARE_SIZE, self.y/SQUARE_SIZE]
+        piecePosition[self.name] = self.square
+
 
         
 
 
 class Knight(piece):
-    def __init__(self, team, array):
-        super().__init__(team, array)
+    def __init__(self, name, team, array):
+        super().__init__(name, team, array)
         if(team == "black"):
             self.pic = pygame.image.load("Images/Black_Knight.png")
         if(team == "white"):
@@ -24,9 +34,10 @@ class Knight(piece):
         self.pic = pygame.transform.scale(self.pic, (SQUARE_SIZE,SQUARE_SIZE))
         self.PlacePic()
         
+        
 class Pawn(piece):
-    def __init__(self, team, array):
-        super().__init__(team, array)
+    def __init__(self, name, team, array):
+        super().__init__(name, team, array)
         if(team == "black"):
             self.pic = pygame.image.load("Images/Black_Pawn.png")
         if(team == "white"):
@@ -34,8 +45,8 @@ class Pawn(piece):
         self.pic = pygame.transform.scale(self.pic, (SQUARE_SIZE,SQUARE_SIZE))
         self.PlacePic()
 class Bishop(piece):
-    def __init__(self, team, array):
-        super().__init__(team, array)
+    def __init__(self, name, team, array):
+        super().__init__(name, team, array)
         if(team == "black"):
             self.pic = pygame.image.load("Images/Black_Bishop.png")
         if(team == "white"):
@@ -43,8 +54,8 @@ class Bishop(piece):
         self.pic = pygame.transform.scale(self.pic, (SQUARE_SIZE,SQUARE_SIZE))
         self.PlacePic()
 class Rook(piece):
-    def __init__(self, team, array):
-        super().__init__(team, array)
+    def __init__(self, name, team, array):
+        super().__init__(name, team, array)
         if(team == "black"):
             self.pic = pygame.image.load("Images/Black_Rook.png")
         if(team == "white"):
@@ -53,8 +64,8 @@ class Rook(piece):
         self.PlacePic()
 
 class Queen(piece):
-    def __init__(self, team, array):
-        super().__init__(team, array)
+    def __init__(self, name, team, array):
+        super().__init__(name, team, array)
         if(team == "black"):
             self.pic = pygame.image.load("Images/Black_Queen.png")
         if(team == "white"):
@@ -64,8 +75,8 @@ class Queen(piece):
 
 
 class King(piece):
-    def __init__(self, team, array):
-        super().__init__(team, array)
+    def __init__(self, name, team, array):
+        super().__init__(name, team, array)
         if(team == "black"):
             self.pic = pygame.image.load("Images/Black_King.png")
         if(team == "white"):
@@ -100,68 +111,114 @@ pygame.display.set_icon(icon)
 
 #While true the game will run
 running = True
+
+
 #piecePostion = 
+piecePosition = {}
 
 def InitializeBoardPieces():
     #Black pieces
-    blackKnight1 = Knight("black", [SQUARE_SIZE,0])
-    blackKnight2 = Knight("black", [6 * SQUARE_SIZE,0])
-    blackRook1 = Rook("black", [0,0])
-    blackRook2 = Rook("black", [7 * SQUARE_SIZE,0])
-    blackBishop1 = Bishop("black", [2 * SQUARE_SIZE,0])
-    blackBishop2 = Bishop("black", [5 * SQUARE_SIZE,0])
-    blackQueen = Queen("black", [3 * SQUARE_SIZE, 0])
-    blackKing = King("black", [4 * SQUARE_SIZE, 0])
-    blackPawn1 = Pawn("black", [0, SQUARE_SIZE])
-    blackPawn2 = Pawn("black", [1 * SQUARE_SIZE, SQUARE_SIZE])
-    blackPawn3 = Pawn("black", [2 * SQUARE_SIZE, SQUARE_SIZE])
-    blackPawn4 = Pawn("black", [3 * SQUARE_SIZE, SQUARE_SIZE])
-    blackPawn5 = Pawn("black", [4 * SQUARE_SIZE, SQUARE_SIZE])
-    blackPawn6 = Pawn("black", [5 * SQUARE_SIZE, SQUARE_SIZE])
-    blackPawn7 = Pawn("black", [6 * SQUARE_SIZE, SQUARE_SIZE])
-    blackPawn8 = Pawn("black", [7 * SQUARE_SIZE, SQUARE_SIZE])
+    blackKnight1 = Knight("blackKnight1", "black", [SQUARE_SIZE,0])
+    blackKnight2 = Knight("blackKnight2","black", [6 * SQUARE_SIZE,0])
+    blackRook1 = Rook("blackRook1", "black", [0,0])
+    blackRook2 = Rook("blackRook2", "black", [7 * SQUARE_SIZE,0])
+    blackBishop1 = Bishop("blackBishop1", "black", [2 * SQUARE_SIZE,0])
+    blackBishop2 = Bishop("blackBishop2", "black", [5 * SQUARE_SIZE,0])
+    blackQueen = Queen("blackQueen", "black", [3 * SQUARE_SIZE, 0])
+    blackKing = King("blackKing", "black", [4 * SQUARE_SIZE, 0])
+    blackPawn1 = Pawn("blackPawn1", "black", [0, SQUARE_SIZE])
+    blackPawn2 = Pawn("blackPawn2", "black", [1 * SQUARE_SIZE, SQUARE_SIZE])
+    blackPawn3 = Pawn("blackPawn3", "black", [2 * SQUARE_SIZE, SQUARE_SIZE])
+    blackPawn4 = Pawn("blackPawn4", "black", [3 * SQUARE_SIZE, SQUARE_SIZE])
+    blackPawn5 = Pawn("blackPawn5", "black", [4 * SQUARE_SIZE, SQUARE_SIZE])
+    blackPawn6 = Pawn("blackPawn6", "black", [5 * SQUARE_SIZE, SQUARE_SIZE])
+    blackPawn7 = Pawn("blackPawn7", "black", [6 * SQUARE_SIZE, SQUARE_SIZE])
+    blackPawn8 = Pawn("blackPawn8", "black", [7 * SQUARE_SIZE, SQUARE_SIZE])
+    
     
 
 
     #White pieces
-    whiteRook1 = Rook("white", [0,7 * SQUARE_SIZE])
-    whiteRook2 = Rook("white", [7 * SQUARE_SIZE,7 * SQUARE_SIZE])
-    whiteKnight1 = Knight("white", [SQUARE_SIZE, 7 * SQUARE_SIZE])
-    whiteKnight2 = Knight("white", [6 * SQUARE_SIZE, 7 * SQUARE_SIZE])
-    whiteBishop1 = Bishop("white", [2 * SQUARE_SIZE, 7 * SQUARE_SIZE])
-    whiteBishop2 = Bishop("white", [5 * SQUARE_SIZE, 7 * SQUARE_SIZE])
-    whiteQueen = Queen("white", [3 * SQUARE_SIZE, 7 * SQUARE_SIZE])
-    whiteKing = King("white", [4 * SQUARE_SIZE, 7 * SQUARE_SIZE])
-    whitePawn1 = Pawn("white", [0, 6 * SQUARE_SIZE])
-    whitePawn2 = Pawn("white", [1 * SQUARE_SIZE, 6 * SQUARE_SIZE])
-    whitePawn3 = Pawn("white", [2 * SQUARE_SIZE, 6 * SQUARE_SIZE])
-    whitePawn4 = Pawn("white", [3 * SQUARE_SIZE, 6 * SQUARE_SIZE])
-    whitePawn5 = Pawn("white", [4 * SQUARE_SIZE, 6 * SQUARE_SIZE])
-    whitePawn6 = Pawn("white", [5 * SQUARE_SIZE, 6 * SQUARE_SIZE])
-    whitePawn7 = Pawn("white", [6 * SQUARE_SIZE, 6 * SQUARE_SIZE])
-    whitePawn8 = Pawn("white", [7 * SQUARE_SIZE, 6 * SQUARE_SIZE])
+    whiteRook1 = Rook("whiteRook1", "white", [0,7 * SQUARE_SIZE])
+    whiteRook2 = Rook("whiteRook2", "white", [7 * SQUARE_SIZE,7 * SQUARE_SIZE])
+    whiteKnight1 = Knight("whiteKnight1", "white", [SQUARE_SIZE, 7 * SQUARE_SIZE])
+    whiteKnight2 = Knight("whiteKnight2", "white", [6 * SQUARE_SIZE, 7 * SQUARE_SIZE])
+    whiteBishop1 = Bishop("whiteBishop1", "white", [2 * SQUARE_SIZE, 7 * SQUARE_SIZE])
+    whiteBishop2 = Bishop("whiteBishop2", "white", [5 * SQUARE_SIZE, 7 * SQUARE_SIZE])
+    whiteQueen = Queen("whiteQueen", "white", [3 * SQUARE_SIZE, 7 * SQUARE_SIZE])
+    whiteKing = King("whiteKing", "white", [4 * SQUARE_SIZE, 7 * SQUARE_SIZE])
+    whitePawn1 = Pawn("whitePawn1", "white", [0, 6 * SQUARE_SIZE])
+    whitePawn2 = Pawn("whitePawn2", "white", [1 * SQUARE_SIZE, 6 * SQUARE_SIZE])
+    whitePawn3 = Pawn("whitePawn3", "white", [2 * SQUARE_SIZE, 6 * SQUARE_SIZE])
+    whitePawn4 = Pawn("whitePawn4", "white", [3 * SQUARE_SIZE, 6 * SQUARE_SIZE])
+    whitePawn5 = Pawn("whitePawn5", "white", [4 * SQUARE_SIZE, 6 * SQUARE_SIZE])
+    whitePawn6 = Pawn("whitePawn6", "white", [5 * SQUARE_SIZE, 6 * SQUARE_SIZE])
+    whitePawn7 = Pawn("whitePawn7", "white", [6 * SQUARE_SIZE, 6 * SQUARE_SIZE])
+    whitePawn8 = Pawn("whitePawn8", "white", [7 * SQUARE_SIZE, 6 * SQUARE_SIZE])
    
 def ClickSquareLocation(pos):
-    square = []
-    if pos[0] >= 128:
+    square = [0,0]
+    if pos[0] <= 128:
         square[0] = 1
+    elif pos[0] <= 256:
+        square[0] = 2
+    elif pos[0] <= 384:
+        square[0] = 3
+    elif pos[0] <= 512:
+        square[0] = 4
+    elif pos[0] <= 640:
+        square[0] = 5
+    elif pos[0] <= 768:
+        square[0] = 6
+    elif pos[0] <= 896:
+        square[0] = 7
+    elif pos[0] <= 1024:
+        square[0] = 8
 
-        print(square)
+
+    if pos[1] <= 128:
+        square[1] = 1
+    elif pos[1] <= 256:
+        square[1] = 2
+    elif pos[1] <= 384:
+        square[1] = 3
+    elif pos[1] <= 512:
+        square[1] = 4
+    elif pos[1] <= 640:
+        square[1] = 5
+    elif pos[1] <= 768:
+        square[1] = 6
+    elif pos[1] <= 896:
+        square[1] = 7
+    elif pos[1] <= 1124:
+        square[1] = 8
+
+    return square
+
 
 
 #Game loop
 while running:
+
+    initialize = False
+    if initialize == False:
+        InitializeBoardPieces()
+        initialize = True
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
         if event.type == pygame.MOUSEBUTTONUP:
             pos = pygame.mouse.get_pos()
-            print(pos)
+            print(ClickSquareLocation(pos))
+            
+            
 
 
     screen.blit(backround, (0,0))
-    InitializeBoardPieces()
+    
+    
+
     
     # Flip the display
     pygame.display.update()
