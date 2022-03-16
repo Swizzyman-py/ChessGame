@@ -10,7 +10,7 @@ class piece(pygame.sprite.Sprite):
         self.y = array[1]
         self.team = team
         self.name = name
-        self.SetPieceSquare()
+        self. position = self.SetPieceSquare()
         
     def PlacePic(self):
         screen.blit(self.pic, (self.x, self.y))
@@ -19,6 +19,12 @@ class piece(pygame.sprite.Sprite):
     def SetPieceSquare(self):
         self.square = [self.x/SQUARE_SIZE, self.y/SQUARE_SIZE]
         piecePosition[self.name] = self.square
+
+    def update(self):
+        pos = pygame.mouse.get_pos()
+        self.rect.midtop = pos
+        if self.punching:
+            self.rect.move_ip(5, 10)
 
 
         
@@ -119,13 +125,21 @@ piecePosition = {}
 def InitializeBoardPieces():
     #Black pieces
     blackKnight1 = Knight("blackKnight1", "black", [SQUARE_SIZE,0])
+    obj_list.append(blackKnight1)
     blackKnight2 = Knight("blackKnight2","black", [6 * SQUARE_SIZE,0])
+    obj_list.append(blackKnight2)
     blackRook1 = Rook("blackRook1", "black", [0,0])
+    obj_list.append(blackRook1)
     blackRook2 = Rook("blackRook2", "black", [7 * SQUARE_SIZE,0])
+    obj_list.append(blackRook2)
     blackBishop1 = Bishop("blackBishop1", "black", [2 * SQUARE_SIZE,0])
+    obj_list.append(blackBishop1)
     blackBishop2 = Bishop("blackBishop2", "black", [5 * SQUARE_SIZE,0])
+    obj_list.append(blackBishop2)
     blackQueen = Queen("blackQueen", "black", [3 * SQUARE_SIZE, 0])
+    obj_list.append(blackQueen)
     blackKing = King("blackKing", "black", [4 * SQUARE_SIZE, 0])
+    obj_list.append(blackKing)
     blackPawn1 = Pawn("blackPawn1", "black", [0, SQUARE_SIZE])
     blackPawn2 = Pawn("blackPawn2", "black", [1 * SQUARE_SIZE, SQUARE_SIZE])
     blackPawn3 = Pawn("blackPawn3", "black", [2 * SQUARE_SIZE, SQUARE_SIZE])
@@ -134,19 +148,32 @@ def InitializeBoardPieces():
     blackPawn6 = Pawn("blackPawn6", "black", [5 * SQUARE_SIZE, SQUARE_SIZE])
     blackPawn7 = Pawn("blackPawn7", "black", [6 * SQUARE_SIZE, SQUARE_SIZE])
     blackPawn8 = Pawn("blackPawn8", "black", [7 * SQUARE_SIZE, SQUARE_SIZE])
+    obj_list.append(blackPawn1)
+    obj_list.append(blackPawn2)
+    obj_list.append(blackPawn3)
+    obj_list.append(blackPawn4)
+    obj_list.append(blackPawn5)
+    obj_list.append(blackPawn6)
+    obj_list.append(blackPawn7)
+    obj_list.append(blackPawn8)
     
-    
-
-
     #White pieces
     whiteRook1 = Rook("whiteRook1", "white", [0,7 * SQUARE_SIZE])
+    obj_list.append(whiteRook1)
     whiteRook2 = Rook("whiteRook2", "white", [7 * SQUARE_SIZE,7 * SQUARE_SIZE])
+    obj_list.append(whiteRook2)
     whiteKnight1 = Knight("whiteKnight1", "white", [SQUARE_SIZE, 7 * SQUARE_SIZE])
+    obj_list.append(whiteKnight1)
     whiteKnight2 = Knight("whiteKnight2", "white", [6 * SQUARE_SIZE, 7 * SQUARE_SIZE])
+    obj_list.append(whiteKnight2)
     whiteBishop1 = Bishop("whiteBishop1", "white", [2 * SQUARE_SIZE, 7 * SQUARE_SIZE])
+    obj_list.append(whiteBishop1)
     whiteBishop2 = Bishop("whiteBishop2", "white", [5 * SQUARE_SIZE, 7 * SQUARE_SIZE])
+    obj_list.append(whiteBishop2)
     whiteQueen = Queen("whiteQueen", "white", [3 * SQUARE_SIZE, 7 * SQUARE_SIZE])
+    obj_list.append(whiteQueen)
     whiteKing = King("whiteKing", "white", [4 * SQUARE_SIZE, 7 * SQUARE_SIZE])
+    obj_list.append(whiteKing)
     whitePawn1 = Pawn("whitePawn1", "white", [0, 6 * SQUARE_SIZE])
     whitePawn2 = Pawn("whitePawn2", "white", [1 * SQUARE_SIZE, 6 * SQUARE_SIZE])
     whitePawn3 = Pawn("whitePawn3", "white", [2 * SQUARE_SIZE, 6 * SQUARE_SIZE])
@@ -155,6 +182,15 @@ def InitializeBoardPieces():
     whitePawn6 = Pawn("whitePawn6", "white", [5 * SQUARE_SIZE, 6 * SQUARE_SIZE])
     whitePawn7 = Pawn("whitePawn7", "white", [6 * SQUARE_SIZE, 6 * SQUARE_SIZE])
     whitePawn8 = Pawn("whitePawn8", "white", [7 * SQUARE_SIZE, 6 * SQUARE_SIZE])
+    obj_list.append(whitePawn1)
+    obj_list.append(whitePawn2)
+    obj_list.append(whitePawn3)
+    obj_list.append(whitePawn4)
+    obj_list.append(whitePawn5)
+    obj_list.append(whitePawn6)
+    obj_list.append(whitePawn7)
+    obj_list.append(whitePawn8)
+
    
 def ClickSquareLocation(pos):
     square = [0,0]
@@ -210,14 +246,17 @@ while running:
             running = False
         if event.type == pygame.MOUSEBUTTONUP:
             pos = pygame.mouse.get_pos()
-            print(ClickSquareLocation(pos))
+            for x in range(0,32):
+                if(ClickSquareLocation(pos) == obj_list[x].position):
+                    obj_list[x].update()
             
             
 
 
     screen.blit(backround, (0,0))
-    
-    
+
+    for j in range(0,32):
+        obj_list[j].PlacePic()
 
     
     # Flip the display
